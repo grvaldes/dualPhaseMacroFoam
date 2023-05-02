@@ -37,11 +37,11 @@ volScalarField K
     mesh
 );
 
-IOdictionary cRelPermProps
+IOdictionary relPermProps
 (
     IOobject
     (
-        "cRelPermProps",
+        "relPermProps",
         runTime.constant(),
         mesh,
         IOobject::MUST_READ,
@@ -49,7 +49,7 @@ IOdictionary cRelPermProps
     )
 );
 
-cRelPerm CPerm("cRelPerm",cRelPermProps,xi,p,K);
+relPerm CPerm("relPerm",relPermProps,xi,p,K);
 
 const dimensionedScalar& nf = CPerm.nf_;
 const volScalarField& rhog = CPerm.rhog_;

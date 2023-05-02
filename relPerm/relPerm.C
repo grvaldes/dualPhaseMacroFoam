@@ -1,6 +1,6 @@
-#include "cRelPerm.H"
+#include "relPerm.H"
 
-Foam::cRelPerm::cRelPerm(
+Foam::relPerm::relPerm(
 	const word& name,
 	const dictionary& dict,
 	const volScalarField& xi,
@@ -8,7 +8,7 @@ Foam::cRelPerm::cRelPerm(
 	const volScalarField& K)
 	:
 	name_(name), dict_(dict), xi_(xi), p_(p), K_(K),
-	nf_(dict_.lookup("nf")),
+	nf_(dict_.lookupOrDefault("nf",1)),
 	nb_(dict_.lookup("nb")),
 	mug_(dict_.lookup("mug")),
 	mul_(dict_.lookup("mul")),
@@ -77,15 +77,15 @@ Foam::cRelPerm::cRelPerm(
         p_.mesh(),
         dimensionedScalar("rhog",dimDensity,0)
     ),
-	rhol_(dict_.lookup("rhol")),
-	kg_(dict_.lookup("kg"))
+	rhol_(dict_.lookupOrDefault("rhol",0)),
+	kg_(dict_.lookupOrDefault("kg",0))
 
 {
 	correctRelPerm();
 	correctDensity();
 }
 
-void Foam::cRelPerm::correctRelPerm()
+void Foam::relPerm::correctRelPerm()
 {
     krl_ = pow(xi_,3+2/nb_);
     krg_ = (1-xi_)*(1-xi_)*(1-pow(xi_,1+2/nb_));
@@ -94,7 +94,7 @@ void Foam::cRelPerm::correctRelPerm()
     Ml_ = K_ * krl_ / mul_;
 }
 
-void Foam::cRelPerm::correctDensity()
+void Foam::relPerm::correctDensity()
 {
     rhog_ = kg_ * p_;
 }
