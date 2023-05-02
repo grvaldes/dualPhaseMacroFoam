@@ -77,8 +77,23 @@ Foam::relPerm::relPerm(
         p_.mesh(),
         dimensionedScalar("rhog",dimDensity,0)
     ),
-	rhol_(dict_.lookupOrDefault("rhol",0)),
-	kg_(dict_.lookupOrDefault("kg",0))
+	rhol_(
+        dimensionedScalar
+        (
+            "rhol", 
+            dimDensity, 
+            dict_.lookupOrDefault("rhol",0)
+        )
+    ),
+	kg_
+    (
+        dimensionedScalar
+        (
+            "kg", 
+            dimTime*dimTime/(dimLength*dimLength), 
+            dict_.lookupOrDefault("kg",0)
+        )
+    )
 
 {
 	correctRelPerm();
