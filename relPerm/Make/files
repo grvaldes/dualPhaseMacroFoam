@@ -1,0 +1,4 @@
+cRelPerm.C
+iRelPerm.C
+
+LIB = $(FOAM_USER_LIBBIN)/libRelPerm
