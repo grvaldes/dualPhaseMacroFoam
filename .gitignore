@@ -1,4 +1,4 @@
 .gitignore
 /.vscode
-/lnInclude*
-/relPerm/lnInclude*
+/lnInclude
+/relPerm/lnInclude
