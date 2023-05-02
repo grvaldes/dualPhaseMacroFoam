@@ -8,7 +8,15 @@ Foam::relPerm::relPerm(
 	const volScalarField& K)
 	:
 	name_(name), dict_(dict), xi_(xi), p_(p), K_(K),
-	nf_(dict_.lookupOrDefault("nf",1)),
+	nf_
+    (
+        dimensionedScalar
+        (
+            "nf",
+            dimless,
+            dict_.lookupOrDefault("nf",1)
+        )
+    ),
 	nb_(dict_.lookup("nb")),
 	mug_(dict_.lookup("mug")),
 	mul_(dict_.lookup("mul")),
