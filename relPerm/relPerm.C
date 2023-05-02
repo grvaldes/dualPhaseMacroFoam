@@ -8,15 +8,7 @@ Foam::relPerm::relPerm(
 	const volScalarField& K)
 	:
 	name_(name), dict_(dict), xi_(xi), p_(p), K_(K),
-	nf_
-    (
-        dimensionedScalar
-        (
-            "nf",
-            dimless,
-            dict_.lookupOrDefault("nf",1)
-        )
-    ),
+	nf_(dict_.lookup("nf")),
 	nb_(dict_.lookup("nb")),
 	mug_(dict_.lookup("mug")),
 	mul_(dict_.lookup("mul")),
@@ -28,7 +20,7 @@ Foam::relPerm::relPerm(
             xi_.time().timeName(),
             xi_.db(),
             IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
         dimensionedScalar("krg",dimless,0)
@@ -41,7 +33,7 @@ Foam::relPerm::relPerm(
             xi_.time().timeName(),
             xi_.db(),
             IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
         dimensionedScalar("krl",dimless,0)
@@ -54,7 +46,7 @@ Foam::relPerm::relPerm(
             xi_.time().timeName(),
             xi_.db(),
             IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
         dimensionedScalar("Mg",dimLength*dimLength/dimPressure/dimTime, Zero)
@@ -67,7 +59,7 @@ Foam::relPerm::relPerm(
             xi_.time().timeName(),
             xi_.db(),
             IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
         dimensionedScalar("Ml",dimLength*dimLength/dimPressure/dimTime, Zero)
@@ -77,32 +69,16 @@ Foam::relPerm::relPerm(
         IOobject
         (
             "rhog",
-            p_.time().timeName(),
-            p_.db(),
+            xi_.time().timeName(),
+            xi_.db(),
             IOobject::NO_READ,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
-        p_.mesh(),
-        dimensionedScalar("rhog",dimDensity,0)
+        xi_.mesh(),
+        dimensionedScalar("rhog", dimDensity, 0)
     ),
-	rhol_(
-        dimensionedScalar
-        (
-            "rhol", 
-            dimDensity, 
-            dict_.lookupOrDefault("rhol",0)
-        )
-    ),
-	kg_
-    (
-        dimensionedScalar
-        (
-            "kg", 
-            dimTime*dimTime/(dimLength*dimLength), 
-            dict_.lookupOrDefault("kg",0)
-        )
-    )
-
+	rhol_(dict_.lookup("rhol")),
+	kg_(dict_.lookup("kg"))
 {
 	correctRelPerm();
 	correctDensity();
