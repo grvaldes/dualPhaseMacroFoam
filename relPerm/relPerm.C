@@ -1,6 +1,6 @@
-#include "cRelPerm.H"
+#include "relPerm.H"
 
-Foam::cRelPerm::cRelPerm(
+Foam::relPerm::relPerm(
 	const word& name,
 	const dictionary& dict,
 	const volScalarField& xi,
@@ -20,7 +20,7 @@ Foam::cRelPerm::cRelPerm(
             xi_.time().timeName(),
             xi_.db(),
             IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
         dimensionedScalar("krg",dimless,0)
@@ -33,7 +33,7 @@ Foam::cRelPerm::cRelPerm(
             xi_.time().timeName(),
             xi_.db(),
             IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
         dimensionedScalar("krl",dimless,0)
@@ -46,7 +46,7 @@ Foam::cRelPerm::cRelPerm(
             xi_.time().timeName(),
             xi_.db(),
             IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
         dimensionedScalar("Mg",dimLength*dimLength/dimPressure/dimTime, Zero)
@@ -59,7 +59,7 @@ Foam::cRelPerm::cRelPerm(
             xi_.time().timeName(),
             xi_.db(),
             IOobject::READ_IF_PRESENT,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
         dimensionedScalar("Ml",dimLength*dimLength/dimPressure/dimTime, Zero)
@@ -69,23 +69,22 @@ Foam::cRelPerm::cRelPerm(
         IOobject
         (
             "rhog",
-            p_.time().timeName(),
-            p_.db(),
+            xi_.time().timeName(),
+            xi_.db(),
             IOobject::NO_READ,
-            IOobject::NO_WRITE
+            IOobject::AUTO_WRITE
         ),
-        p_.mesh(),
-        dimensionedScalar("rhog",dimDensity,0)
+        xi_.mesh(),
+        dimensionedScalar("rhog", dimDensity, 0)
     ),
 	rhol_(dict_.lookup("rhol")),
 	kg_(dict_.lookup("kg"))
-
 {
 	correctRelPerm();
 	correctDensity();
 }
 
-void Foam::cRelPerm::correctRelPerm()
+void Foam::relPerm::correctRelPerm()
 {
     krl_ = pow(xi_,3+2/nb_);
     krg_ = (1-xi_)*(1-xi_)*(1-pow(xi_,1+2/nb_));
@@ -94,7 +93,7 @@ void Foam::cRelPerm::correctRelPerm()
     Ml_ = K_ * krl_ / mul_;
 }
 
-void Foam::cRelPerm::correctDensity()
+void Foam::relPerm::correctDensity()
 {
     rhog_ = kg_ * p_;
 }

@@ -37,11 +37,11 @@ volScalarField K
     mesh
 );
 
-IOdictionary cRelPermProps
+IOdictionary relPermProps
 (
     IOobject
     (
-        "cRelPermProps",
+        "relPermProps",
         runTime.constant(),
         mesh,
         IOobject::MUST_READ,
@@ -49,12 +49,18 @@ IOdictionary cRelPermProps
     )
 );
 
-cRelPerm CPerm("cRelPerm",cRelPermProps,xi,p,K);
+relPerm CPerm("relPerm",relPermProps,xi,p,K);
 
 const dimensionedScalar& nf = CPerm.nf_;
 const volScalarField& rhog = CPerm.rhog_;
 const dimensionedScalar& rhol = CPerm.rhol_;
-const dimensionedScalar& kg = CPerm.kg_;
+dimensionedScalar& kg = CPerm.kg_;
+
+if (incompressible)
+{
+    kg *= 0;
+}
+
 
 volVectorField Ug
 (
@@ -90,7 +96,7 @@ surfaceScalarField phig
         runTime.timeName(),
         mesh,
         IOobject::NO_READ,
-        IOobject::NO_WRITE
+        IOobject::AUTO_WRITE
     ),
     linearInterpolate(Ug) & mesh.Sf()
 );

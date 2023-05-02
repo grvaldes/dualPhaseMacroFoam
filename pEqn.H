@@ -12,7 +12,7 @@
     pEqn.solve();
 
     surfaceScalarField phiP = pEqn.flux();
-
+    
     phig = phiP * Mgf / (rhogf*Mgf + rhol*Mlf);
     phil = phiP * Mlf / (rhogf*Mgf + rhol*Mlf);
 
@@ -22,5 +22,8 @@
     Ug.correctBoundaryConditions();
     Ul.correctBoundaryConditions();
 
-    CPerm.correctDensity();
+    if (!incompressible)
+    {
+        CPerm.correctDensity();
+    }
 }
