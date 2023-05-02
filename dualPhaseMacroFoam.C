@@ -1,5 +1,5 @@
 #include "fvCFD.H"
-#include "cRelPerm.H"
+#include "relPerm.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
