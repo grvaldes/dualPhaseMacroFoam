@@ -1,3 +1,3 @@
-dualPhaseMacroFoam.C
+tensorDualPhaseMacroFoam.C
 
-EXE = $(FOAM_USER_APPBIN)/dualPhaseMacroFoam
+EXE = $(FOAM_USER_APPBIN)/tensorDualPhaseMacroFoam
