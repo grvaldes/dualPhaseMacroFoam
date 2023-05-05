@@ -8,18 +8,25 @@
         nf*(rhol - rhog)*fvc::ddt(xi) + 
         nf*(1 - xi)*kg*fvm::ddt(p)
     );
-
-    pEqn.solve();
     
-    surfaceScalarField phiP = pEqn.flux();
-    phig = phiP * Mgf / (rhogf*Mgf + rhol*Mlf);
-    phil = phiP * Mlf / (rhogf*Mgf + rhol*Mlf);
+    pEqn.solve();
 
-    Ug = fvc::reconstruct(phig);
-    Ul = fvc::reconstruct(phil);
+    // surfaceScalarField phiP = pEqn.flux();
+
+    // phig = phiP * Mgf / (rhogf*Mgf + rhol*Mlf);
+    // phil = phiP * Mlf / (rhogf*Mgf + rhol*Mlf);
+
+    // Ug = fvc::reconstruct(phig);
+    // Ul = fvc::reconstruct(phil);
+
+    Ug = -Mg & fvc::grad(p);
+    Ul = -Ml & fvc::grad(p);
 
     Ug.correctBoundaryConditions();
     Ul.correctBoundaryConditions();
+
+    // phil = linearInterpolate(Ul) & Ul.mesh().Sf();
+    // phig = linearInterpolate(Ug) & Ug.mesh().Sf();
 
     if (!incompressible)
     {
