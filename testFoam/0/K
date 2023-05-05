@@ -18,8 +18,8 @@ FoamFile
 
 dimensions      [ 0 2 0 0 0 0 0 ];
 
-// internalField   uniform 1e-6;
-internalField   uniform ( 1e-6 0 0 0 1e-6 0 0 0 1e-6 );
+Kx 1e-8;
+internalField   uniform ( $Kx 0 0 0 $Kx 0 0 0 $Kx );
 
 boundaryField
 {

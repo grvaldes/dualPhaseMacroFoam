@@ -2,4 +2,4 @@
 lnInclude
 relPerm/lnInclude
 testFoam/*[0-9].*
-testFoam/[1-9]
+testFoam/[1-9]*
