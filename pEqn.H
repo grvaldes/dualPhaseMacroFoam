@@ -27,5 +27,8 @@
     Ug.correctBoundaryConditions();
     Ul.correctBoundaryConditions();
 
-    CPerm.correctDensity();
+    if (!incompressible)
+    {
+        CPerm.correctDensity();
+    }
 }

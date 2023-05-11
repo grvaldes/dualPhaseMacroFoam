@@ -1,12 +1,12 @@
-#ifndef CRELPERM_H
-#define CRELPERM_H
+#ifndef RELPERM_H
+#define RELPERM_H
 
 #include "volFields.H"
 
 namespace Foam
 {
 
-struct cRelPerm {
+struct relPerm {
 	word name_;
 	dictionary dict_;
 	const volScalarField& xi_;
@@ -24,14 +24,14 @@ struct cRelPerm {
 	dimensionedScalar rhol_;
 	dimensionedScalar kg_;
 
-	cRelPerm(
+	relPerm(
 		const word& name,
 		const dictionary& dict,
 		const volScalarField& xi,
 		const volScalarField& p,
 		const volScalarField& K);
 
-	~cRelPerm(){};
+	~relPerm(){};
 
 	void correctRelPerm();
 	void correctDensity();
