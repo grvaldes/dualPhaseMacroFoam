@@ -1,7 +1,7 @@
 {
 	fvScalarMatrix xiEqn
 	(
-        	nf*fvm::ddt(xi) + fvc::div(phil)
+        nf*fvm::ddt(xi) + fvc::div(phil)
 	);
 
 	xiEqn.solve();

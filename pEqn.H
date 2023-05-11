@@ -15,12 +15,6 @@
     
     phig = -(Mgf * phiP) & p.mesh().Sf();
     phil = -(Mlf * phiP) & p.mesh().Sf();
-
-    // surfaceScalarField phiP = pEqn.flux();
-    
-    // phig = phiP * Mgf / (rhogf*Mgf + rhol*Mlf);
-    // phil = phiP * Mlf / (rhogf*Mgf + rhol*Mlf);
-
     Ug = fvc::reconstruct(phig);
     Ul = fvc::reconstruct(phil);
 
