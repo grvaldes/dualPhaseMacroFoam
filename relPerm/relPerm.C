@@ -5,7 +5,7 @@ Foam::relPerm::relPerm(
 	const dictionary& dict,
 	const volScalarField& xi,
 	const volScalarField& p,
-	const volScalarField& K)
+	const volTensorField& K)
 	:
 	name_(name), dict_(dict), xi_(xi), p_(p), K_(K),
 	nf_(dict_.lookup("nf")),
@@ -49,7 +49,7 @@ Foam::relPerm::relPerm(
             IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
-        dimensionedScalar("Mg",dimLength*dimLength/dimPressure/dimTime, Zero)
+        dimensionedTensor("Mg",dimLength*dimLength/dimPressure/dimTime, Zero)
     ),
 	Ml_
     (
@@ -62,7 +62,7 @@ Foam::relPerm::relPerm(
             IOobject::AUTO_WRITE
         ),
         xi_.mesh(),
-        dimensionedScalar("Ml",dimLength*dimLength/dimPressure/dimTime, Zero)
+        dimensionedTensor("Ml",dimLength*dimLength/dimPressure/dimTime, Zero)
     ),
 	rhog_
     (

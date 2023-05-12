@@ -9,8 +9,8 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
-    //class       volTensorField;
+    // class       volScalarField;
+    class       volTensorField;
     location    "0";
     object      K;
 }

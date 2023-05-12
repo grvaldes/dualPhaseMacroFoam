@@ -11,15 +11,15 @@ struct relPerm {
 	dictionary dict_;
 	const volScalarField& xi_;
 	const volScalarField& p_;
-	const volScalarField& K_;
+	const volTensorField& K_;
 	dimensionedScalar nf_;
 	dimensionedScalar nb_;
 	dimensionedScalar mug_;
 	dimensionedScalar mul_;
 	volScalarField krg_;
 	volScalarField krl_;
-	volScalarField Mg_;
-	volScalarField Ml_;
+	volTensorField Mg_;
+	volTensorField Ml_;
 	volScalarField rhog_;
 	dimensionedScalar rhol_;
 	dimensionedScalar kg_;
@@ -29,7 +29,7 @@ struct relPerm {
 		const dictionary& dict,
 		const volScalarField& xi,
 		const volScalarField& p,
-		const volScalarField& K);
+		const volTensorField& K);
 
 	~relPerm(){};
 

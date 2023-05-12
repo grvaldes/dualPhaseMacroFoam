@@ -24,7 +24,7 @@ volScalarField xi
     mesh
 );
 
-volScalarField K
+volTensorField K
 (
     IOobject
     (
