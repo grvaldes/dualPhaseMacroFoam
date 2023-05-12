@@ -15,6 +15,7 @@
     
     phig = -(Mgf * phiP) & p.mesh().Sf();
     phil = -(Mlf * phiP) & p.mesh().Sf();
+    
     Ug = fvc::reconstruct(phig);
     Ul = fvc::reconstruct(phil);
 
