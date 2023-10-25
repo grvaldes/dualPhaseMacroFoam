@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
         runTime++;
 
-        Info<< "Time = " << runTime.timeName() << endl;
+        Info<< nl << "Time = " << runTime.timeName() << endl;
 
         #include "xiEqn.H"
         #include "updateSaturationProperties.H"
