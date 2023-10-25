@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
         runTime++;
 
-        Info<< "Time = " << runTime.timeName() << endl;
+        Info<< nl << "Time = " << runTime.timeName() << endl;
 
         #include "xiEqn.H"
         #include "updateSaturationProperties.H"
@@ -47,8 +47,8 @@ int main(int argc, char *argv[])
 	    runTime.write();
     }
 
-    Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-        << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+    Info<< nl << "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+        << nl << "ClockTime = " << runTime.elapsedClockTime() << " s"
         << nl << endl;
     Info<< "End\n" << endl;
 

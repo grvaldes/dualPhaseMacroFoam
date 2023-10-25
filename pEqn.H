@@ -9,32 +9,13 @@
         nf*(1 - xi)*kg*fvm::ddt(p)
     );
 
-    Info<< "Ml after" << endl;
-    Info<< Ml << endl;
-	Info<< "Mg after" << endl;
-    Info<< Mg << endl;
-
-    Info<< "p before" << endl;
-    Info<< p << endl;
-
     pEqn.solve();
 
-    Info<< "p after" << endl;
-    Info<< p << endl;
+    surfaceScalarField phiP = pEqn.flux();
+    surfaceVectorField gradP = linearInterpolate(fvc::grad(p));
 
-    surfaceVectorField phiP = linearInterpolate(fvc::grad(p));
-
-    Info<< "phiP" << endl;
-    Info<< phiP << endl;
-
-    Info<< "phil before" << endl;
-    Info<< phil << endl;
-
-    phig = -(Mgf & phiP) & p.mesh().Sf();
-    phil = -(Mlf & phiP) & p.mesh().Sf();
-
-    Info<< "phil after" << endl;
-    Info<< phil << endl;
+    phig = (phiP - rhogf * ((Mgf & gradP) & p.mesh().Sf())) / rhogf;
+    phil = (phiP - rhol * ((Mlf & gradP) & p.mesh().Sf()))/ rhol;
 
     Ug = fvc::reconstruct(phig);
     Ul = fvc::reconstruct(phil);

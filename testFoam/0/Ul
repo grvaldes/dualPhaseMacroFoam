@@ -23,7 +23,7 @@ boundaryField
 {
     Inlet
     {
-        type            zeroGradient;
+        // type            zeroGradient;
         //type                flowRateInletVelocity;
         //volumetricFlowRate  constant 20000;
         type            fixedValue;
@@ -33,7 +33,7 @@ boundaryField
     {
         type            zeroGradient;
         // type            fixedValue;
-        // value           uniform (0.02 0 0);
+        // value           uniform (0.2 0 0);
     }
     Walls
     {
