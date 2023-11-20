@@ -34,6 +34,12 @@ int main(int argc, char *argv[])
 
     while (runTime.run())
     {
+        if (min(xi).value() > 0.99)
+        {
+            Info << "\nSaturation over 99%. Stopping simulation.\n";
+            break;
+        }
+
         runTime.setDeltaT(runTime.deltaTValue());
 
         runTime++;
