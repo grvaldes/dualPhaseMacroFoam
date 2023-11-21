@@ -11,10 +11,15 @@
     
     pEqn.solve();
 
-    surfaceVectorField gradP = linearInterpolate(fvc::grad(p));
+    // surfaceVectorField gradP = linearInterpolate(fvc::grad(p));
 
-    phig = -(Mgf * gradP) & p.mesh().Sf();
-    phil = -(Mlf * gradP) & p.mesh().Sf();
+    // phig = -(Mgf * gradP) & p.mesh().Sf();
+    // phil = -(Mlf * gradP) & p.mesh().Sf();
+
+    surfaceScalarField phiP = pEqn.flux();
+    
+    phig = phiP * Mgf / (rhogf*Mgf + rhol*Mlf);
+    phil = phiP * Mlf / (rhogf*Mgf + rhol*Mlf);
     
     Ug = fvc::reconstruct(phig);
     Ul = fvc::reconstruct(phil);
