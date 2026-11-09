@@ -1,4 +1,5 @@
 #include "fvCFD.H"
+#include "fixedGradientFvPatchFields.H"
 #include "relPerm.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
