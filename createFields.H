@@ -113,3 +113,7 @@ surfaceScalarField phil
     ),
     linearInterpolate(Ul) & mesh.Sf()
 );
+
+// Ensure oldTime fields are allocated for automatic time stepping
+(void)p.oldTime();
+(void)xi.oldTime();
